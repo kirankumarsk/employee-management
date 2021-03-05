@@ -1,0 +1,121 @@
+import java.util.*;
+
+ // Compiler version JDK 11.0.2
+
+ class Dcoder
+ {
+   public static void main(String args[])
+   { 
+ 
+   Scanner sc = new Scanner(System.in);
+      
+      String lastname[] = new String[500]; //array can accept 500 String values
+      String firstname[] = new String[500]; //array can accept 500 String values
+      int age[] = new int[500]; //array can accept 500 int values
+      String JP[] = new String[500];  
+      double ms[] = new double[500];
+      
+      int counter = 0;
+      for (int x=0; true; x++) //condition is set to true therefore the loop will never end
+      {
+        System.out.print("\nEMPLOYEE INFORMATION SYSTEM\n");
+        System.out.print("[1] Add Employee Record\n");
+        System.out.print("[2] List All Employees\n");
+        System.out.print("[3] Search Employee\n");
+        System.out.print("[4] Exit Program\n");
+        System.out.print("Enter your choice: ");
+        
+            int choice = Integer.parseInt(sc.nextLine());
+        
+        if (choice == 1) //USE DOUBLE EQUAL SIGN WHEN COMPARING.
+        {
+          System.out.print("\nADD EMPLOYEE RECORD\n");
+          
+          System.out.print("Enter employee last name: ");
+          lastname[counter] = sc.nextLine();
+          
+          System.out.print("Enter employee first name: ");
+          firstname[counter] = sc.nextLine();
+          
+          System.out.print("Enter employee age: ");
+          age[counter] = Integer.parseInt(sc.nextLine());
+          
+          System.out.print("Enter job position: ");
+          JP[counter] = sc.nextLine();
+          
+          
+          System.out.print("Enter monthly salary: ");
+          ms[counter] = Double.parseDouble(sc.nextLine());
+          
+          counter++; //increment for counter for our array
+        }
+        else if (choice == 2)
+        {
+          System.out.print("\nLIST OF ALL EMPLOYEES\n");
+          
+          for (int y = 0; y < counter; y++) //note that the counter variable increases each time an employee record is added
+          {
+          int rowNumber = y + 1;
+          double as = ms[y]*12;
+          System.out.print(rowNumber + ": " + lastname[y] + ", " + firstname[y] + "\n"); //note that the index used is the variable y. as the loop continues, the value of y increase, allowing the program to traverse between array values
+          System.out.print("Age: " + age[y] + " years old\n");
+          System.out.print("Job Position: " + JP[y] + "\n");
+          System.out.print("Monthly Salary: " + ms[y] + "\n");
+          System.out.print("Annual Salary: " + as + "\n\n");
+          }
+          
+          if (counter == 0)
+          {
+            System.out.print("NO EMPLOYEE RECORD YET\n");
+          }
+        }
+        else if (choice == 3)
+        {
+          System.out.print("\nSEARCH EMPLOYEE\n");
+          
+          System.out.print("Enter employee last name/first name to search: ");
+          String nameToSearch = sc.nextLine();
+          
+          int numberOfSearchResults = 0;
+          String str = ""; //this is initialized as an empty string.
+          for (int y = 0; y < counter; y++)
+          {
+            if (nameToSearch.equalsIgnoreCase(lastname[y]) || nameToSearch.equalsIgnoreCase(firstname[y])) //== won't work when comparing strings in java, instead, you have to use .equals or .equalsIgnoreCase. Syntax is String1.equals(String2) or String1.equalsIgnoreCase(String2).
+            {
+              int rowNumber = numberOfSearchResults + 1;
+              double as = ms[y]*12;
+              str += rowNumber + ": " + lastname[y] + ", " + firstname[y] + "\n"; //everytime there is a match, the program will append/add the matching information to the String str.
+            str += "Age: " + age[y] + " years old\n";
+            str += "Job Position: " + JP[y] + "\n"; 
+            str += "Monthly Salary: " + ms[y] + "\n"; 
+            str += "Annual Salary: " + as + "\n\n";
+            
+              numberOfSearchResults++; //increases everytime there is a match
+            }
+            
+          }
+          
+          if (numberOfSearchResults == 0) //note that this condition is outside of the for loop. this will only be true if there are no results for the last name being searched.
+          {
+          System.out.print("NO RECORD FOUND!\n");
+          }
+          else
+          {
+            System.out.print(numberOfSearchResults + " found!\n");
+            System.out.print(str); //remember, inside our for loop, whenever there is a match with the last name, the employee record gets appended to the String str. This line only displays the final value of str.
+          }
+        }
+        else if (choice == 4) {
+        
+            System.out.print("\nTHANK YOU FOR USING THE EMPLOYEE INFORMATION SYSTEM!\n");
+            System.exit(0);
+        }
+        else
+        {
+        System.out.print("\nINVALID CHOICE!\n");
+        }
+      }
+    
+   
+   }
+ }
